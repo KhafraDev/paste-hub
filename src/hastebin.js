@@ -32,7 +32,7 @@ const hastebin = async (m, url) => {
             body: m // most likely encoded on their side
         });
 
-        if(res.status === 200) { // extremely rare
+        if(res.status === 200) {
             const json = await res.json();
             return {
                 key: json.key,
