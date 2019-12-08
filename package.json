@@ -1,0 +1,31 @@
+{
+  "name": "paste-hub",
+  "version": "1.0.2",
+  "description": "Paste to many different sites.",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test/index.test.js https://hasteb.in/documents"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KhafraDev/paste-hub.git"
+  },
+  "keywords": [
+    "paste",
+    "hastebin",
+    "hatebin"
+  ],
+  "author": "Khafra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KhafraDev/paste-hub/issues"
+  },
+  "homepage": "https://github.com/KhafraDev/paste-hub#readme"
+}
