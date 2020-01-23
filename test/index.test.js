@@ -1,22 +1,29 @@
-const { hastebin, hatebin } = require('../src');
+const { hastebin, hatebin, ofcode } = require('../src');
+const assert = require('assert');
 
-/*
-Example usage: (leave argsv empty to default to hastebin.com)
-node test/index.test.js https://hasteb.in/documents
+describe('Paste-Hub supports multiple formats.', () => {
+    it('Hatebin.com | A Hastebin alternative', async () => {
+        const paste = await hatebin('Uploading a paste using @khafradev/paste-hub!');
+        assert.strictEqual(typeof paste, 'string');
+    });
 
-Expected return values (key will be different):
-{ key: 'tcdkucqrtb', url: 'https://hatebin.com/tcdkucqrtb' }
-{ key: 'igehadok', url: 'https://hasteb.in/igehadok' }
-*/
+    it('paste.ofcode.org A place to paste code', async () => {
+        const paste = await ofcode('Hello, world!', 'python');
+        assert.strictEqual(typeof paste, 'string');
+    });
 
-const hatebinTest = async () => {
-    console.log(await hatebin("console.log('I am uploading from a test with khafradev/paste-hub');"));
-}
+    describe('Hastebin.com or Servers running haste-server', () => {
+        it('hastebin.com should not error out!', async () => {
+            await assert.doesNotReject(hastebin('Uploading a paste using @khafradev/paste-hub!'));
+        });
 
-const hastebinTest = async u => {
-    const r = await hastebin("console.log('I am uploading from a test with khafradev/paste-hub');", u || null);
-    console.log(r);
-}
+        it('an alternative server (https://hastebin-plus.herokuapp.com/) should not error out!', async () => {
+            await assert.doesNotReject(hastebin('Uploading a paste using @khafradev/paste-hub!', 'https://hastebin-plus.herokuapp.com/documents'));
+        });
 
-hatebinTest();
-hastebinTest(process.argv[2]);
+        it('Passing an invalid URL should reject', async () => {
+            await assert.rejects(hastebin('Not uploading a paste!', 'not a url, lol'));
+        });
+    });
+});
+

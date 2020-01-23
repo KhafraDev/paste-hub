@@ -1,4 +1,5 @@
 module.exports = {
     hatebin: require('./hatebin'),
-    hastebin: require('./hastebin')
+    hastebin: require('./hastebin'),
+    ofcode: require('./pasteofcode')
 }
